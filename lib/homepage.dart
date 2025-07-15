@@ -386,10 +386,41 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: addNote,
-        child: Icon(Icons.add),
-        tooltip: "Créer une note",
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            heroTag: 'help',
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('Aide'),
+                  content: Text(
+                    'Pour ajouter une note, cliquez sur le bouton +.\n'
+                    'Utilisez les menus pour gérer les thèmes et exporter vos données.\n'
+                    'Appuyez sur une note pour la modifier.',
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('Fermer'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            tooltip: 'Aide',
+            child: Icon(Icons.help),
+          ),
+          SizedBox(height: 12),
+          FloatingActionButton(
+            heroTag: 'add',
+            onPressed: addNote,
+            tooltip: "Créer une note",
+            child: Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
